@@ -1,0 +1,28 @@
+name: Tests
+
+on: push
+
+jobs:
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: ["8.0"]
+
+    steps:
+    - name: Setup PHP ${{ matrix.php }}
+      run: |
+        sudo add-apt-repository ppa:ondrej/php
+        sudo apt update
+        sudo apt install php${{ matrix.php }}
+
+    - name: Setup Composer
+      run: wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet --install-dir=$HOME/.local/bin --filename=composer
+
+    - name: Install dependencies
+      run: composer install
+
+    - name: Run PHPUnit
+      run: vendor/bin/phpunit --configuration phpunit.xml

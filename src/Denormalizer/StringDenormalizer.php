@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spiks\UserInputProcessor\Denormalizer;
 
 use LogicException;
+use Psr\Log\LoggerInterface;
 use Spiks\UserInputProcessor\ConstraintViolation\ConstraintViolationCollection;
 use Spiks\UserInputProcessor\ConstraintViolation\StringIsTooLong;
 use Spiks\UserInputProcessor\ConstraintViolation\StringIsTooShort;
@@ -20,6 +21,11 @@ use Spiks\UserInputProcessor\Pointer;
  */
 final class StringDenormalizer
 {
+    public function __construct(
+        private ?LoggerInterface $logger = null
+    ) {
+    }
+
     /**
      * Validates and denormalizes passed data.
      *
@@ -80,6 +86,20 @@ final class StringDenormalizer
         }
 
         if ($violations->isNotEmpty()) {
+            if (null !== $this->logger) {
+                $this->logger->info(
+                    sprintf(
+                        'Field %s contains %d constraint violations',
+                        $pointer->toString(),
+                        $violations->count()
+                    ),
+                    [
+                        'field' => $pointer->toString(),
+                        'violations' => $violations->toArray(),
+                    ]
+                );
+            }
+
             throw new ValidationError($violations);
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spiks\UserInputProcessor\Denormalizer;
 
 use LogicException;
+use Psr\Log\LoggerInterface;
 use Spiks\UserInputProcessor\ConstraintViolation\ConstraintViolationCollection;
 use Spiks\UserInputProcessor\ConstraintViolation\NumberIsTooBig;
 use Spiks\UserInputProcessor\ConstraintViolation\NumberIsTooSmall;
@@ -20,6 +21,11 @@ use Spiks\UserInputProcessor\Pointer;
  */
 final class FloatDenormalizer
 {
+    public function __construct(
+        private ?LoggerInterface $logger = null
+    ) {
+    }
+
     /**
      * Validates and denormalizes passed data.
      *

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spiks\UserInputProcessor\Denormalizer;
 
+use Psr\Log\LoggerInterface;
 use Spiks\UserInputProcessor\ConstraintViolation\ConstraintViolationCollection;
 use Spiks\UserInputProcessor\ConstraintViolation\WrongPropertyType;
 use Spiks\UserInputProcessor\Exception\ValidationError;
@@ -14,6 +15,11 @@ use Spiks\UserInputProcessor\Pointer;
  */
 final class BooleanDenormalizer
 {
+    public function __construct(
+        private ?LoggerInterface $logger = null
+    ) {
+    }
+
     /**
      * Validates and denormalizes passed data.
      *

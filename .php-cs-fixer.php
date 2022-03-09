@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
     ->in('./src/')
+    ->in('./tests/')
     ->exclude('./vendor')
     ->append(['.php-cs-fixer.php'])
 ;

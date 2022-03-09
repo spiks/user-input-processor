@@ -29,7 +29,6 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "symfony/framework-bundle": "^5.4",
     "friendsofphp/php-cs-fixer": "^3.4",
     "jetbrains/phpstorm-attributes": "^1.0",
     "phpstan/phpstan": "^1.2",
@@ -48,5 +47,8 @@
     "psr-4": {
       "Tests\\Spiks\\UserInputProcessor\\": "tests/"
     }
+  },
+  "suggest": {
+    "symfony/framework-bundle": "install if you use a Symfony farmework"
   }
 }

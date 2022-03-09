@@ -20,7 +20,8 @@ composer require spiks/user-input-processor
 
 #### Symfony framework
 
-Enable the bundle in the  `config/bundles.php`
+Enable the bundle in the `config/bundles.php`
+
 ```php
 Spiks\UserInputProcessor\UserInputProcessorBundle::class => ['all' => true],
 ```

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spiks\UserInputProcessor;
 
 use InvalidArgumentException;
+use function array_key_exists;
 
 /**
  * Denormalization rules that may differ depending on the discriminator value.
@@ -39,7 +40,7 @@ class ObjectDiscriminatorFields
      */
     public function getStaticFieldsByDiscriminatorValue(string $discriminatorValue): ObjectStaticFields
     {
-        if (!\array_key_exists($discriminatorValue, $this->fields)) {
+        if (!array_key_exists($discriminatorValue, $this->fields)) {
             throw new InvalidArgumentException('Unknown value: ' . $discriminatorValue);
         }
 

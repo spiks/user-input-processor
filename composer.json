@@ -1,7 +1,7 @@
 {
   "name": "spiks/user-input-processor",
   "description": "Denormalizer and validator for any kind of user input.",
-  "type": "library",
+  "type": "symfony-bundle",
   "license": "MIT",
   "homepage": "https://github.com/spiks/user-input-processor",
   "readme": "./README.md",
@@ -29,23 +29,11 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
+    "symfony/framework-bundle": "^5.4",
     "friendsofphp/php-cs-fixer": "^3.4",
     "jetbrains/phpstorm-attributes": "^1.0",
     "phpstan/phpstan": "^1.2",
     "phpunit/phpunit": "^9.5",
     "vimeo/psalm": "^4.15"
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "autoload": {
-    "psr-4": {
-      "Spiks\\UserInputProcessor\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\Spiks\\UserInputProcessor\\": "tests/"
-    }
   }
 }

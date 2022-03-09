@@ -11,6 +11,7 @@ use Spiks\UserInputProcessor\ConstraintViolation\NumberIsTooSmall;
 use Spiks\UserInputProcessor\ConstraintViolation\WrongPropertyType;
 use Spiks\UserInputProcessor\Exception\ValidationError;
 use Spiks\UserInputProcessor\Pointer;
+use function is_int;
 
 /**
  * Denormalizer for fields where integer is expected.
@@ -45,7 +46,7 @@ final class IntegerDenormalizer
 
         $violations = new ConstraintViolationCollection();
 
-        if (!\is_int($data)) {
+        if (!is_int($data)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 $pointer,
                 $data,

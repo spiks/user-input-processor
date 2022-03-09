@@ -14,6 +14,11 @@ use Spiks\UserInputProcessor\Exception\ValidationError;
 use Spiks\UserInputProcessor\ObjectDiscriminatorFields;
 use Spiks\UserInputProcessor\ObjectStaticFields;
 use Spiks\UserInputProcessor\Pointer;
+use function array_key_exists;
+use function count;
+use function in_array;
+use function is_array;
+use function is_string;
 
 /**
  * Denormalizer for fields where associative arrays are expected.
@@ -52,7 +57,7 @@ final class ObjectDenormalizer
     ): array {
         $violations = new ConstraintViolationCollection();
 
-        if (!\is_array($data) || !self::isAssocArray($data)) {
+        if (!is_array($data) || !self::isAssocArray($data)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 $pointer,
                 $data,
@@ -62,7 +67,7 @@ final class ObjectDenormalizer
             throw new ValidationError($violations);
         }
 
-        if (!\array_key_exists($discriminatorFieldName, $data)) {
+        if (!array_key_exists($discriminatorFieldName, $data)) {
             $violations[] = new MandatoryFieldMissing(
                 Pointer::append($pointer, $discriminatorFieldName),
             );
@@ -72,7 +77,7 @@ final class ObjectDenormalizer
 
         $discriminatorValue = $data[$discriminatorFieldName];
 
-        if (!\is_string($discriminatorValue)) {
+        if (!is_string($discriminatorValue)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 Pointer::append($pointer, $discriminatorFieldName),
                 $discriminatorValue,
@@ -82,7 +87,7 @@ final class ObjectDenormalizer
             throw new ValidationError($violations);
         }
 
-        if (!\in_array($discriminatorValue, $discriminatorFields->getPossibleDiscriminatorValues(), true)) {
+        if (!in_array($discriminatorValue, $discriminatorFields->getPossibleDiscriminatorValues(), true)) {
             $violations[] = new WrongDiscriminatorValue(
                 Pointer::append($pointer, $discriminatorFieldName),
                 $discriminatorFields->getPossibleDiscriminatorValues(),
@@ -98,7 +103,7 @@ final class ObjectDenormalizer
             $discriminatorFields->getStaticFieldsByDiscriminatorValue($discriminatorValue),
         );
 
-        if (\array_key_exists($discriminatorFieldName, $processedData)) {
+        if (array_key_exists($discriminatorFieldName, $processedData)) {
             throw new LogicException('The same field name as discriminator field name can not be used within ObjectStaticFields declarations');
         }
 
@@ -128,7 +133,7 @@ final class ObjectDenormalizer
     ): array {
         $violations = new ConstraintViolationCollection();
 
-        if (!\is_array($data) || !self::isAssocArray($data)) {
+        if (!is_array($data) || !self::isAssocArray($data)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 $pointer,
                 $data,
@@ -141,7 +146,7 @@ final class ObjectDenormalizer
         $processedData = [];
 
         foreach ($staticFields->getFields() as $fieldName => $fieldDefinition) {
-            if (!\array_key_exists($fieldName, $data)) {
+            if (!array_key_exists($fieldName, $data)) {
                 if ($fieldDefinition->isMandatory()) {
                     $violations[] = new MandatoryFieldMissing(Pointer::append($pointer, $fieldName));
                 }
@@ -180,6 +185,6 @@ final class ObjectDenormalizer
 
     private static function isAssocArray(array $array): bool
     {
-        return array_keys($array) !== range(0, \count($array) - 1);
+        return array_keys($array) !== range(0, count($array) - 1);
     }
 }

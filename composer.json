@@ -35,5 +35,18 @@
     "phpstan/phpstan": "^1.2",
     "phpunit/phpunit": "^9.5",
     "vimeo/psalm": "^4.15"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Spiks\\UserInputProcessor\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Spiks\\UserInputProcessor\\": "tests/"
+    }
   }
 }

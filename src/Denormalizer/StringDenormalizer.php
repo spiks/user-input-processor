@@ -12,6 +12,7 @@ use Spiks\UserInputProcessor\ConstraintViolation\ValueDoesNotMatchRegex;
 use Spiks\UserInputProcessor\ConstraintViolation\WrongPropertyType;
 use Spiks\UserInputProcessor\Exception\ValidationError;
 use Spiks\UserInputProcessor\Pointer;
+use function is_string;
 
 /**
  * Denormalizer for fields where string is expected.
@@ -48,7 +49,7 @@ final class StringDenormalizer
 
         $violations = new ConstraintViolationCollection();
 
-        if (!\is_string($data)) {
+        if (!is_string($data)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 $pointer,
                 $data,

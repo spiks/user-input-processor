@@ -1,7 +1,7 @@
 {
   "name": "spiks/user-input-processor",
   "description": "Denormalizer and validator for any kind of user input.",
-  "type": "library",
+  "type": "symfony-bundle",
   "license": "MIT",
   "homepage": "https://github.com/spiks/user-input-processor",
   "readme": "./README.md",
@@ -47,5 +47,8 @@
     "psr-4": {
       "Tests\\Spiks\\UserInputProcessor\\": "tests/"
     }
+  },
+  "suggest": {
+    "symfony/framework-bundle": "install if you use a Symfony farmework"
   }
 }

@@ -28,14 +28,14 @@ final class ObjectDenormalizerTest extends TestCase
             [
                 [
                     'type' => 'a',
-                    'foo' => 'Test',
+                    'foo'  => 'Test',
                 ],
             ],
             [
                 [
                     'type' => 'b',
-                    'bar' => 'Test',
-                    'baz' => 'Test',
+                    'bar'  => 'Test',
+                    'baz'  => 'Test',
                 ],
             ],
         ];

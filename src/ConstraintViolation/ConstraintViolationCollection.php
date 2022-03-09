@@ -9,6 +9,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use OutOfBoundsException;
+use function count;
 
 /**
  * @implements IteratorAggregate<int, ConstraintViolationInterface>
@@ -45,7 +46,7 @@ class ConstraintViolationCollection implements IteratorAggregate, Countable, Arr
 
     public function count(): int
     {
-        return \count($this->violations);
+        return count($this->violations);
     }
 
     /**
@@ -114,8 +115,8 @@ class ConstraintViolationCollection implements IteratorAggregate, Countable, Arr
     public function toArray(): array
     {
         return array_map(static fn (ConstraintViolationInterface $violation) => [
-            'pointer' => $violation->getPointer()->toString(),
-            'type' => $violation::getType(),
+            'pointer'     => $violation->getPointer()->toString(),
+            'type'        => $violation::getType(),
             'description' => $violation->getDescription(),
         ], $this->violations);
     }

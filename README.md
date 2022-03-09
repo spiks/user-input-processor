@@ -18,6 +18,14 @@ PHP 8.0 or newer is required. The library is available in [Packagist](https://pa
 composer require spiks/user-input-processor
 ```
 
+#### Symfony framework
+
+Enable the bundle in the `config/bundles.php`
+
+```php
+Spiks\UserInputProcessor\UserInputProcessorBundle::class => ['all' => true],
+```
+
 ## Conception
 
 ### Denormalizer

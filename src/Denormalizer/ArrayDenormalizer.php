@@ -12,6 +12,8 @@ use Spiks\UserInputProcessor\ConstraintViolation\ConstraintViolationCollection;
 use Spiks\UserInputProcessor\ConstraintViolation\WrongPropertyType;
 use Spiks\UserInputProcessor\Exception\ValidationError;
 use Spiks\UserInputProcessor\Pointer;
+use function count;
+use function is_array;
 
 /**
  * Denormalizer for fields where indexed array (lists) is expected.
@@ -50,7 +52,7 @@ final class ArrayDenormalizer
 
         $violations = new ConstraintViolationCollection();
 
-        if (!\is_array($data)) {
+        if (!is_array($data)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 $pointer,
                 $data,
@@ -70,14 +72,14 @@ final class ArrayDenormalizer
             throw new ValidationError($violations);
         }
 
-        if (null !== $minItems && \count($data) < $minItems) {
+        if (null !== $minItems && count($data) < $minItems) {
             $violations[] = new ArrayIsTooShort(
                 $pointer,
                 $minItems
             );
         }
 
-        if (null !== $maxItems && \count($data) > $maxItems) {
+        if (null !== $maxItems && count($data) > $maxItems) {
             $violations[] = new ArrayIsTooLong(
                 $pointer,
                 $maxItems
@@ -112,6 +114,6 @@ final class ArrayDenormalizer
 
     private static function isIndexedArray(array $array): bool
     {
-        return 0 === \count($array) || array_keys($array) === range(0, \count($array) - 1);
+        return 0 === count($array) || array_keys($array) === range(0, count($array) - 1);
     }
 }

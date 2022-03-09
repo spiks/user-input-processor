@@ -8,6 +8,7 @@ use Spiks\UserInputProcessor\ConstraintViolation\ConstraintViolationCollection;
 use Spiks\UserInputProcessor\ConstraintViolation\WrongPropertyType;
 use Spiks\UserInputProcessor\Exception\ValidationError;
 use Spiks\UserInputProcessor\Pointer;
+use function is_bool;
 
 /**
  * Denormalizer for fields where boolean is expected.
@@ -32,7 +33,7 @@ final class BooleanDenormalizer
     ): bool {
         $violations = new ConstraintViolationCollection();
 
-        if (!\is_bool($data)) {
+        if (!is_bool($data)) {
             $violations[] = WrongPropertyType::guessGivenType(
                 $pointer,
                 $data,

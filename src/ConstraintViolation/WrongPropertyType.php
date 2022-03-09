@@ -6,16 +6,17 @@ namespace Spiks\UserInputProcessor\ConstraintViolation;
 
 use Spiks\UserInputProcessor\Pointer;
 use UnexpectedValueException;
+use function gettype;
 
 final class WrongPropertyType implements ConstraintViolationInterface
 {
-    public const JSON_TYPE_ARRAY = 'array';
+    public const JSON_TYPE_ARRAY   = 'array';
     public const JSON_TYPE_BOOLEAN = 'boolean';
-    public const JSON_TYPE_FLOAT = 'float';
+    public const JSON_TYPE_FLOAT   = 'float';
     public const JSON_TYPE_INTEGER = 'integer';
-    public const JSON_TYPE_NULL = 'null';
-    public const JSON_TYPE_OBJECT = 'object';
-    public const JSON_TYPE_STRING = 'string';
+    public const JSON_TYPE_NULL    = 'null';
+    public const JSON_TYPE_OBJECT  = 'object';
+    public const JSON_TYPE_STRING  = 'string';
 
     public const TYPE = 'wrong_property_type';
 
@@ -72,14 +73,14 @@ final class WrongPropertyType implements ConstraintViolationInterface
 
     private static function getJsonTypeFromValue(mixed $value): string
     {
-        return match (\gettype($value)) {
+        return match (gettype($value)) {
             'boolean' => self::JSON_TYPE_BOOLEAN,
             'integer' => self::JSON_TYPE_INTEGER,
-            'double' => self::JSON_TYPE_FLOAT,
-            'string' => self::JSON_TYPE_STRING,
-            'array' => self::JSON_TYPE_ARRAY,
-            'NULL' => self::JSON_TYPE_NULL,
-            default => throw new UnexpectedValueException('Given PHP type is not supported in JSON conversion: ' . $value),
+            'double'  => self::JSON_TYPE_FLOAT,
+            'string'  => self::JSON_TYPE_STRING,
+            'array'   => self::JSON_TYPE_ARRAY,
+            'NULL'    => self::JSON_TYPE_NULL,
+            default   => throw new UnexpectedValueException('Given PHP type is not supported in JSON conversion: ' . $value),
         };
     }
 }

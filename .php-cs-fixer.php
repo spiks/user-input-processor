@@ -22,7 +22,8 @@ return (new PhpCsFixer\Config())
         '@Symfony:risky'      => true,
         '@DoctrineAnnotation' => true,
         // end default rules set
-        'concat_space' => [
+        'declare_strict_types' => true,
+        'concat_space'         => [
             'spacing' => 'one',
         ],
         'blank_line_before_statement' => [

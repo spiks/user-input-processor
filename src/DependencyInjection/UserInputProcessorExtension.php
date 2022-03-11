@@ -17,11 +17,11 @@ class UserInputProcessorExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $container->register('user_input_processor.array_denormolizer', ArrayDenormalizer::class);
-        $container->register('user_input_processor.boolean_denormolizer', BooleanDenormalizer::class);
-        $container->register('user_input_processor.float_denormolizer', FloatDenormalizer::class);
-        $container->register('user_input_processor.integer_denormolizer', IntegerDenormalizer::class);
-        $container->register('user_input_processor.object_denormolizer', ObjectDenormalizer::class);
-        $container->register('user_input_processor.string_denormolizer', StringDenormalizer::class);
+        $container->register('user_input_processor.array_denormalizer', ArrayDenormalizer::class);
+        $container->register('user_input_processor.boolean_denormalizer', BooleanDenormalizer::class);
+        $container->register('user_input_processor.float_denormalizer', FloatDenormalizer::class);
+        $container->register('user_input_processor.integer_denormalizer', IntegerDenormalizer::class);
+        $container->register('user_input_processor.object_denormalizer', ObjectDenormalizer::class);
+        $container->register('user_input_processor.string_denormalizer', StringDenormalizer::class);
     }
 }
